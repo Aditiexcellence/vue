@@ -1,8 +1,8 @@
 <template>
   <div>
-      <br/>
-         {{date}}
-         <br/>
+    <br>
+    {{date}}
+    <br>
     <input type="text" v-model="name">
     <button v-on:click="clear">Clear</button>
     <button v-on:click="capital">Capital</button>
