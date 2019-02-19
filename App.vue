@@ -2,23 +2,27 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <first msg="Welcome"/>
+    <!-- <button msg = "enter your name"/> -->
+    <display/>
   </div>
 </template>
 
 <script>
-import first from './components/first.vue'
+import first from "./components/first.vue";
+import display from "./components/button.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    first
+    first,
+    display
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
