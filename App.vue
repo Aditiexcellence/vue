@@ -1,21 +1,21 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <first msg="Welcome"/>
+    <First msg="Welcome"/>
     <!-- <button msg = "enter your name"/> -->
     <display/>
   </div>
 </template>
 
 <script>
-import first from "./components/first.vue";
-import display from "./components/button.vue";
+import First from "./components/first.vue";
+import Display from "./components/button.vue";
 
 export default {
   name: "app",
   components: {
-    first,
-    display
+    First,
+    Display
   }
 };
 </script>
