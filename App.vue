@@ -2,15 +2,13 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <First msg="Welcome"/>
-    <!-- <button msg = "enter your name"/> -->
-    <display/>
+    <Display/>
   </div>
 </template>
 
 <script>
 import First from "./components/first.vue";
 import Display from "./components/button.vue";
-
 export default {
   name: "app",
   components: {

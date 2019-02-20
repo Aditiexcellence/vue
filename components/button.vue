@@ -1,34 +1,41 @@
 <template>
   <div>
-    <br>
+    <div :class="{red: isRed}">{{name}}</div>
     {{date}}
-    <br>
-    <input type="text" v-model="name">
-    <button v-on:click="clear">Clear</button>
-    <button v-on:click="capital">Capital</button>
+    <div>
+      <input type="text" v-model="name">
+      <button v-on:click="clear">Clear</button>
+      <button v-on:click="capital">Capital</button>
+    </div>
+    <input :checked="isRed" v-model="isRed" type="checkbox" v-on:click="red"> Red
   </div>
 </template>
 <script>
 export default {
   name: "Display",
-  data: () => {
+  data: function() {
     return {
-      name: "Aditi"
+      name: "Aditi",
+      date: false,
+      isRed: false
     };
   },
   created: function() {
+    // eslint-disable-next-line
     console.log("created");
     this.date = new Date();
   },
   mounted: function() {
+    // eslint-disable-next-line
     console.log("mounted");
     this.date = new Date();
   },
   updated: function() {
+    // eslint-disable-next-line
     console.log("updated");
-    this.date = new Date();
   },
   destroyed: function() {
+    // eslint-disable-next-line
     console.log("destroyed");
     this.date = new Date();
   },
@@ -38,7 +45,16 @@ export default {
     },
     capital: function() {
       this.name = this.name.toUpperCase();
+    },
+    red: function() {
+      // eslint-disable-next-line
+      console.log(this.isRed);
     }
   }
 };
 </script>
+<style scoped >
+.red {
+  color: #ee1e1e;
+}
+</style>
