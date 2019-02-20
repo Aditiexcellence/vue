@@ -27,7 +27,7 @@ export default {
   data: function() {
     return {
       selected: {
-       color:"black"
+        color: "black"
       }
     };
   }
