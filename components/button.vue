@@ -11,7 +11,7 @@
     <p>Type something</p>
     <p>Press Enter</p>
     <form v-on:submit.prevent>
-      <input v-on:keypress="submit" type="text" v-model="description">
+      <input v-on:keyup.enter="submit" type="text" v-model="description">
     </form>
     <ul>
       <li v-for="items in data" v-bind:key="items.id">{{items}}</li>
