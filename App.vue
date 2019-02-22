@@ -1,16 +1,29 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <Table/>
+    <Texts @inputData="updateMessage"/>
+    <Lists :msg="childData"/>
   </div>
 </template>
 
 <script>
-import Table from "./components/table.vue";
+import Texts from "./components/text.vue";
+import Lists from "./components/list.vue";
 export default {
   name: "app",
   components: {
-    Table
+    Texts,
+    Lists
+  },
+  data: function() {
+    return {
+      childData: ""
+    };
+  },
+  methods: {
+    updateMessage(variable) {
+      this.childData = variable;
+    }
   }
 };
 </script>
