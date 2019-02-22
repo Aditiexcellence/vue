@@ -7,15 +7,7 @@
       <button v-on:click="clear">Clear</button>
       <button v-on:click="capital">Capital</button>
     </div>
-    <input :checked="isRed" v-model="isRed" type="checkbox" v-on:click="red"> Red
-    <p>Type something</p>
-    <p>Press Enter</p>
-    <form v-on:submit.prevent>
-      <input v-on:keyup.enter="submit" type="text" v-model="description">
-    </form>
-    <ul>
-      <li v-for="items in data" v-bind:key="items.id">{{items}}</li>
-    </ul>
+    <input :checked="isRed" v-model="isRed" type="checkbox"> Red
   </div>
 </template>
 
@@ -27,9 +19,7 @@ export default {
       testing: "Hello",
       name: "Aditi",
       date: false,
-      isRed: false,
-      description: "",
-      data: []
+      isRed: false
     };
   },
   created: function() {
@@ -57,16 +47,6 @@ export default {
     },
     capital: function() {
       this.name = this.name.toUpperCase();
-    },
-    red: function() {
-      // eslint-disable-next-line
-      console.log(this.isRed);
-    },
-    submit: function(e) {
-      if (e.keyCode === 13) {
-        this.data.push(this.description);
-        this.names = "";
-      }
     }
   }
 };
@@ -75,10 +55,5 @@ export default {
 <style scoped>
 .red {
   color: #ee1e1e;
-}
-
-li {
-  border: 1px solid black;
-  padding: 5px;
 }
 </style>

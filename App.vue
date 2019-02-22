@@ -1,19 +1,16 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <First msg="Welcome"/>
-    <Display/>
+    <Table/>
   </div>
 </template>
 
 <script>
-import First from "./components/first.vue";
-import Display from "./components/button.vue";
+import Table from "./components/table.vue";
 export default {
   name: "app",
   components: {
-    First,
-    Display
+    Table
   }
 };
 </script>
