@@ -1,18 +1,15 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <Texts @inputData="updateMessage"/>
-    <Lists :msg="childData"/>
+    <Lists/>
   </div>
 </template>
 
 <script>
-import Texts from "./components/text.vue";
 import Lists from "./components/list.vue";
 export default {
   name: "app",
   components: {
-    Texts,
     Lists
   },
   data: function() {

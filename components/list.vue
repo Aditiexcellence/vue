@@ -1,40 +1,53 @@
 <template>
   <div>
+    <Texts
+      v-bind:edit-index="editIndex"
+      v-bind:name="name"
+      v-on:edit-item="edit"
+      v-on:submit-item="submit"
+    />
     <ul>
-      <li v-for="(items,index) in data" v-bind:item="items" v-bind:key="index">
-        <span>{{items}}</span>
+      <li v-for="(item,index) in data" v-bind:key="index">
+        <span>{{item}}</span>
         <a href="#" v-on:click.prevent="deleteItem(index)">Delete</a>
-        <a href="#" v-on:click.prevent="editItem(index)">Edit</a>
+        <a href="#" v-on:click.prevent="editItem(index,item)">Edit</a>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+import Texts from "./text";
 export default {
   name: "Lists",
-  props: {
-    msg: {
-      type: String
-    }
+  components: {
+    Texts
   },
   data: function() {
     return {
-      data: []
+      data: [],
+      name: "",
+      editIndex: -1
     };
   },
-  watch: {
-    msg: function() {
-      this.data.push(this.msg);
-    }
-  },
   methods: {
+    submit: function(name) {
+      this.data.push(name);
+      this.name = "";
+    },
+    edit: function(obj) {
+      var { name, editIndex, item } = obj;
+      Vue.set(this.data, editIndex, name);
+      this.name = "";
+      this.editIndex = -1;
+    },
     deleteItem: function(index) {
       this.data.splice(index, 1);
     },
     editItem: function(index) {
       this.editIndex = index;
-      this.msg = this.data[index];
+      this.name = this.data[index];
     }
   }
 };
