@@ -12,13 +12,6 @@ export default {
   name: 'app',
   components: {
     Counter
-  }
-}
-import Lists from "./components/list.vue";
-export default {
-  name: "app",
-  components: {
-    Lists
   },
   data: function() {
     return {
