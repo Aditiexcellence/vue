@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <timer/>
+    <Counter/>
   </div>
 </template>
 
 <script>
-import Timer from './components/timer.vue'
+import Counter from './components/counter.vue'
 
 export default {
   name: 'app',
   components: {
-    Timer
+    Counter
   }
 }
 </script>
