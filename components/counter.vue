@@ -15,7 +15,6 @@
 <script>
 export default {
   name: "Timer",
-  props: ["starttime", "endtime", "trans"],
   data: function() {
     return {
       timer: null,

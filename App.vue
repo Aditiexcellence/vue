@@ -13,16 +13,6 @@ export default {
   components: {
     Counter
   },
-  data: function() {
-    return {
-      childData: ""
-    };
-  },
-  methods: {
-    updateMessage(variable) {
-      this.childData = variable;
-    }
-  }
 };
 </script>
 
