@@ -18,8 +18,7 @@ export default {
   data: function() {
     return {
       timer: null,
-      totalTime: 0 * 60,
-      resetButton: false
+      totalTime: 0 * 60
     };
   },
   methods: {
