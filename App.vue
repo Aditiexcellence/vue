@@ -1,32 +1,25 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <Lists/>
+    <Counter/>
   </div>
 </template>
 
 <script>
-import Lists from "./components/list.vue";
+import Counter from './components/counter.vue'
+
 export default {
-  name: "app",
+  name: 'app',
   components: {
-    Lists
+    Counter
   },
-  data: function() {
-    return {
-      childData: ""
-    };
-  },
-  methods: {
-    updateMessage(variable) {
-      this.childData = variable;
-    }
-  }
 };
 </script>
 
 <style>
 #app {
+
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
