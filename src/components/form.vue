@@ -6,7 +6,7 @@
         <b-row>
           <b-col lg="5">Id:</b-col>
           <b-col lg="7">
-        <b-form-input type="number" required v-model="newElement.id"/>
+        <b-form-input  type="number" id="range-1" min="0" v-model="newElement.id"/>
         </b-col>
         </b-row>
         <b-row>
@@ -51,6 +51,7 @@
     <table>
       <thead>
         <tr>
+           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
           <th>Password</th>
@@ -62,6 +63,7 @@
       </thead>
       <tbody>
         <tr v-for="(newElement,index) in sortedStore" v-bind:key="index">
+          <td>{{newElement.id}}</td>
           <td>{{newElement.name}}</td>
           <td>{{newElement.email}}</td>
           <td>{{newElement.password}}</td>
@@ -72,7 +74,7 @@
             <a href="#" v-on:click="deleteItem(index)">Delete</a>
           </td>
           <td>
-            <a href="#" v-on:click="editItem(newElement)" @click="modalShow = !modalShow">Edit</a>
+            <a href="#" v-on:click="editItem(newElement, index)" @click="modalShow = !modalShow">Edit</a>
           </td>
         </tr>
       </tbody>
@@ -117,8 +119,8 @@ export default {
       }
       this.currentSort = s;
     },
-    editItem(dataToEdit) {
-      console.log(this.newElement, dataToEdit);
+    editItem(dataToEdit, index) {
+      this.fixid = dataToEdit.id;
       this.newElement.name = dataToEdit.name;
       this.newElement.email = dataToEdit.email;
       this.newElement.dob = dataToEdit.dob;
@@ -128,10 +130,10 @@ export default {
     },
     addUser: function() {
       if (this.newElement.id=="") {
-        this.store.splice(this.dataToEdit,1, this.newElement);
-         console.log("mjmjm");
-        this.dataToEdit = {
-          id:"",
+        this.store.splice(this.dataToEdit,1,this.newElement);
+         console.log(this.dataToEdit);
+         this.newElement.id == this.fixid;
+        this.newElement = {
           name: "",
           email: "",
           password: "",
