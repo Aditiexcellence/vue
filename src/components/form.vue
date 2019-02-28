@@ -51,7 +51,6 @@
     <table>
       <thead>
         <tr>
-          <th>Id</th>
           <th>Name</th>
           <th>Email</th>
           <th>Password</th>
@@ -63,7 +62,6 @@
       </thead>
       <tbody>
         <tr v-for="(newElement,index) in sortedStore" v-bind:key="index">
-          <td>{{newElement.id}}</td>
           <td>{{newElement.name}}</td>
           <td>{{newElement.email}}</td>
           <td>{{newElement.password}}</td>
@@ -121,7 +119,6 @@ export default {
     },
     editItem(dataToEdit) {
       console.log(this.newElement, dataToEdit);
-       this.newElement.id = dataToEdit.id;
       this.newElement.name = dataToEdit.name;
       this.newElement.email = dataToEdit.email;
       this.newElement.dob = dataToEdit.dob;
@@ -130,10 +127,10 @@ export default {
       this.newElement.checked = dataToEdit.checked;
     },
     addUser: function() {
-      if (this.index!=null) {
-        this.store.splice( 1, this.newElement);
+      if (this.newElement.id=="") {
+        this.store.splice(this.dataToEdit,1, this.newElement);
          console.log("mjmjm");
-        this.newElement = {
+        this.dataToEdit = {
           id:"",
           name: "",
           email: "",
@@ -161,9 +158,6 @@ export default {
     },
     prevPage: function() {
       if (this.currentPage > 1) this.currentPage--;
-    },
-    doMath: function () {
-      return index+1
     }
   },
   computed: {
