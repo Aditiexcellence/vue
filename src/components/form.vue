@@ -6,8 +6,8 @@
         <b-row>
           <b-col lg="5">Id:</b-col>
           <b-col lg="7">
-        <b-form-input  type="number" id="range-1" min="0" v-model="newElement.id"/>
-        </b-col>
+            <b-form-input type="number" min="0" v-model="newElement.id"/>
+          </b-col>
         </b-row>
         <b-row>
           <b-col lg="5">Name:</b-col>
@@ -18,19 +18,38 @@
         <b-row>
           <b-col lg="5">Email:</b-col>
           <b-col lg="7">
-            <b-form-input type="email" v-model="newElement.email"/>
+            <b-form-input
+              type="email"
+              v-model="newElement.email"
+              class="['input-group', isEmailValid()]"
+            />
           </b-col>
         </b-row>
         <b-row>
           <b-col lg="5">Password:</b-col>
           <b-col lg="7">
-            <b-form-input type="password" v-model="newElement.password"/>
+            <b-form-input
+              type="password"
+              v-model="newElement.password"
+              data-vv-name="password"
+              v-validate
+              name="password"
+              data-vv-rules="required|min:5"
+            />
           </b-col>
         </b-row>
         <b-row>
           <b-col lg="5">Confirm-Password:</b-col>
           <b-col lg="7">
-            <b-form-input type="password" v-model="newElement.confirmpassword"/>
+            <b-form-input
+              type="password"
+              v-model="newElement.confirmpassword"
+              data-vv-name="confirm-password"
+              v-validate
+              name="password"
+              data-vv-rules="confirmed:password"
+            />
+            {{errors.first('confirm-password')}}
           </b-col>
         </b-row>
         <b-row>
@@ -51,7 +70,7 @@
     <table>
       <thead>
         <tr>
-           <th>ID</th>
+          <th>ID</th>
           <th>Name</th>
           <th>Email</th>
           <th>Password</th>
@@ -74,7 +93,11 @@
             <a href="#" v-on:click="deleteItem(index)">Delete</a>
           </td>
           <td>
-            <a href="#" v-on:click="editItem(newElement, index)" @click="modalShow = !modalShow">Edit</a>
+            <a
+              href="#"
+              v-on:click="editItem(newElement, index)"
+              @click="modalShow = !modalShow"
+            >Edit</a>
           </td>
         </tr>
       </tbody>
@@ -98,17 +121,25 @@ export default {
       currentPage: 1,
       modalShow: false,
       newElement: {
-        id:"",
+        id: "",
         email: "",
         name: "",
         dob: "",
         password: "",
         confirmpassword: "",
         checked: ""
-      }
+      },
+      reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     };
   },
   methods: {
+    isEmailValid: function() {
+      return this.newElement.email == ""
+        ? ""
+        : this.reg.test(this.newElement.email)
+        ? "has-success"
+        : "has-error";
+    },
     deleteItem: function(index) {
       this.store.splice(index, 1);
       this.newElement = "";
@@ -120,7 +151,7 @@ export default {
       this.currentSort = s;
     },
     editItem(dataToEdit, index) {
-      this.fixid = dataToEdit.id;
+      this.newElement.id = dataToEdit.id;
       this.newElement.name = dataToEdit.name;
       this.newElement.email = dataToEdit.email;
       this.newElement.dob = dataToEdit.dob;
@@ -129,22 +160,36 @@ export default {
       this.newElement.checked = dataToEdit.checked;
     },
     addUser: function() {
-      if (this.newElement.id=="") {
-        this.store.splice(this.dataToEdit,1,this.newElement);
-         console.log(this.dataToEdit);
-         this.newElement.id == this.fixid;
-        this.newElement = {
-          name: "",
-          email: "",
-          password: "",
-          confirmpassword: "",
-          dob: "",
-          checked: ""
-        };
+      if (this.store.length) {
+        this.store.forEach((data, index) => {
+          if (data.id == this.newElement.id) {
+            this.store.splice(this.store[index], 1, this.newElement);
+            this.newElement = {
+              id: "",
+              name: "",
+              email: "",
+              password: "",
+              confirmpass: "",
+              dob: "",
+              checked: ""
+            };
+          } else {
+            this.store.push(this.newElement);
+            this.newElement = {
+              id: "",
+              name: "",
+              email: "",
+              password: "",
+              confirmpassword: "",
+              dob: "",
+              checked: ""
+            };
+          }
+        });
       } else {
         this.store.push(this.newElement);
         this.newElement = {
-          id:"",
+          id: "",
           name: "",
           email: "",
           password: "",
