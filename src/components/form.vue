@@ -29,12 +29,12 @@
           <b-col lg="5">Password:</b-col>
           <b-col lg="7">
             <b-form-input
-              type="password"
-              v-model="newElement.password"
-              data-vv-name="password"
-              v-validate
+              v-validate="'required'"
               name="password"
-              data-vv-rules="required|min:5"
+              type="password"
+              class="form-control"
+              v-model="newElement.password"
+              ref="password"
             />
           </b-col>
         </b-row>
@@ -42,12 +42,12 @@
           <b-col lg="5">Confirm-Password:</b-col>
           <b-col lg="7">
             <b-form-input
+              v-validate="'required|confirmed:password'"
+              name="confirm-password"
               type="password"
+              class="form-control"
               v-model="newElement.confirmpassword"
-              data-vv-name="confirm-password"
-              v-validate
-              name="password"
-              data-vv-rules="confirmed:password"
+              data-vv-as="password"
             />
             {{errors.first('confirm-password')}}
           </b-col>
@@ -173,7 +173,8 @@ export default {
               dob: "",
               checked: ""
             };
-          } else {
+          }
+           else {
             this.store.push(this.newElement);
             this.newElement = {
               id: "",
