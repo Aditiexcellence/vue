@@ -158,35 +158,20 @@ export default {
       this.newElement.password = dataToEdit.password;
       this.newElement.confirmpassword = dataToEdit.confirmpassword;
       this.newElement.checked = dataToEdit.checked;
+      this.newElement.index = index;
     },
     addUser: function() {
-      if (this.store.length) {
-        this.store.forEach((data, index) => {
-          if (data.id == this.newElement.id) {
-            this.store.splice(this.store[index], 1, this.newElement);
-            this.newElement = {
-              id: "",
-              name: "",
-              email: "",
-              password: "",
-              confirmpass: "",
-              dob: "",
-              checked: ""
-            };
-          }
-           else {
-            this.store.push(this.newElement);
-            this.newElement = {
-              id: "",
-              name: "",
-              email: "",
-              password: "",
-              confirmpassword: "",
-              dob: "",
-              checked: ""
-            };
-          }
-        });
+      if (data.id == this.newElement.id) {
+        this.store.splice(this.newElement.index, 1, this.newElement);
+        this.newElement = {
+          id: "",
+          name: "",
+          email: "",
+          password: "",
+          confirmpass: "",
+          dob: "",
+          checked: ""
+        };
       } else {
         this.store.push(this.newElement);
         this.newElement = {

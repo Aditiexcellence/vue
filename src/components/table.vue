@@ -95,6 +95,7 @@ export default {
       this.editRow.confirmpassword = dataToEdit.confirmpassword;
       this.editRow.dob = dataToEdit.dob;
       this.editRow.checked = dataToEdit.checked;
+      this.editRow.index = index;
       this.$refs.modelShow.show();
     },
     nextPage: function() {

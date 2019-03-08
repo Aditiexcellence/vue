@@ -107,7 +107,7 @@ export default {
     },
     show() {
       this.modalShow = true;
-      var row = this.$props.editRow;
+      let row = this.$props.editRow;
       this.newElement.id = row.id;
       this.newElement.name = row.name;
       this.newElement.email = row.email;
@@ -115,42 +115,23 @@ export default {
       this.newElement.confirmpassword = row.confirmpassword;
       this.newElement.dob = row.dob;
       this.newElement.checked = row.checked;
+      this.newElement.index = row.index;
     },
     hideModal() {
       this.$refs.myModalRef.hide();
     },
     addUser: function() {
-      if (this.$props.store.length) {
-        for (var i in this.$props.store) {
-          if (this.store[i].id == this.newElement.id) {
-            this.store[i].name = this.newElement.name;
-            this.store[i].email = this.newElement.email;
-            this.store[i].password = this.newElement.password;
-            this.store[i].confirmpassword = this.newElement.confirmpassword;
-            this.store[i].dob = this.newElement.dob;
-            this.store[i].checked = this.newElement.checked;
-            this.newElement = {
-              id: "",
-              name: "",
-              email: "",
-              password: "",
-              confirmpass: "",
-              dob: "",
-              checked: ""
-            };
-          } else {
-            this.$emit("submit-item", this.newElement);
-            this.newElement = {
-              id: "",
-              name: "",
-              email: "",
-              password: "",
-              confirmpassword: "",
-              dob: "",
-              checked: ""
-            };
-          }
-        }
+      if (this.editRow.id == this.newElement.id) {
+        this.store.splice(this.newElement.index, 1, this.newElement);
+        this.newElement = {
+          id: "",
+          name: "",
+          email: "",
+          password: "",
+          confirmpass: "",
+          dob: "",
+          checked: ""
+        };
       } else {
         this.$emit("submit-item", this.newElement);
         this.newElement = {
