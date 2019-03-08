@@ -32,9 +32,9 @@
         </tr>
       </tbody>
     </table>
-    <p v-if="visible">
-      <button @click="prevPage">Previous</button>
-      <button @click="nextPage">Next</button>
+    <p>
+      <button @click="prevPage" v-if="hidden">Previous</button>
+      <button @click="nextPage" v-if="visible">Next</button>
     </p>
   </div>
 </template>
@@ -49,7 +49,8 @@ export default {
   data: function() {
     return {
       store: [],
-      visible:false,
+      visible: false,
+      hidden: false,
       pageSize: 5,
       currentPage: 1,
       currentSort: "name",
@@ -102,9 +103,11 @@ export default {
     nextPage: function() {
       if (this.currentPage * this.pageSize < this.store.length)
         this.currentPage++;
+      this.hidden = true;
     },
     prevPage: function() {
       if (this.currentPage > 1) this.currentPage--;
+       this.hidden = false;
     }
   },
   computed: {
@@ -127,7 +130,7 @@ export default {
           let end = this.currentPage * this.pageSize;
           if (index >= start && index < end) return true;
           if (index > 4) {
-           this.visible=true;
+            this.visible = true;
           }
         });
     }
