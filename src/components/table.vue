@@ -32,7 +32,7 @@
         </tr>
       </tbody>
     </table>
-    <p id="pagination">
+    <p v-if="visible">
       <button @click="prevPage">Previous</button>
       <button @click="nextPage">Next</button>
     </p>
@@ -49,6 +49,7 @@ export default {
   data: function() {
     return {
       store: [],
+      visible:false,
       pageSize: 5,
       currentPage: 1,
       currentSort: "name",
@@ -113,8 +114,7 @@ export default {
         .sort((a, b) => {
           let modifier = 1;
           if (this.currentSortDir === "desc") modifier = -1;
-          if (a[this.currentSort] < b[this.currentSort]) 
-          {
+          if (a[this.currentSort] < b[this.currentSort]) {
             return -1 * modifier;
           }
           if (a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
@@ -126,9 +126,8 @@ export default {
           let start = (this.currentPage - 1) * this.pageSize;
           let end = this.currentPage * this.pageSize;
           if (index >= start && index < end) return true;
-          if(index>4)
-          {
-            document.getElementById("pagination").style.visibility = "visible";
+          if (index > 4) {
+           this.visible=true;
           }
         });
     }
@@ -147,8 +146,5 @@ td {
   padding-bottom: 5px;
   border-collapse: collapse;
   margin: 20px auto;
-}
-#pagination{
-  visibility:hidden;
 }
 </style>
