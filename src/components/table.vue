@@ -33,8 +33,8 @@
       </tbody>
     </table>
     <p>
-      <button @click="prevPage" v-if="hidden">Previous</button>
-      <button @click="nextPage" v-if="visible">Next</button>
+      <button @click="prevPage" v-if="canShowPrevious">Previous</button>
+      <button @click="nextPage" v-if="canShowNext">Next</button>
     </p>
   </div>
 </template>
@@ -103,11 +103,12 @@ export default {
     nextPage: function() {
       if (this.currentPage * this.pageSize < this.store.length)
         this.currentPage++;
-      this.hidden = true;
+      this.canShowPrevious = true;
     },
     prevPage: function() {
-      if (this.currentPage > 1) this.currentPage--;
-       this.hidden = false;
+      if (this.currentPage > 1) 
+      this.currentPage--;
+       this.canShowPrevious = false;
     }
   },
   computed: {
@@ -130,7 +131,7 @@ export default {
           let end = this.currentPage * this.pageSize;
           if (index >= start && index < end) return true;
           if (index > 4) {
-            this.visible = true;
+            this.canShowNext = true;
           }
         });
     }
