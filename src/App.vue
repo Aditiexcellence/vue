@@ -1,18 +1,18 @@
 <template>
-  <v-app>
- <v-content>
-      <Todo/>
+<v-app>
+    <v-content>
+        <Todo />
     </v-content>
-  </v-app>
+</v-app>
 </template>
 
 <script>
 import Todo from './components/todo.vue'
 
 export default {
-  name: 'App',
-  components: {
-    Todo
-  }
+    name: 'App',
+    components: {
+        Todo
+    }
 }
 </script>
