@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # todo_app
+=======
+# vue-test
+>>>>>>> 082ca3b28ef25a0cdb18cc84195ed5398d1d4638
 
 ## Project setup
 ```
