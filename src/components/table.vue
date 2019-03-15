@@ -32,9 +32,9 @@
         </tr>
       </tbody>
     </table>
-    <p id="pagination">
-      <button @click="prevPage">Previous</button>
-      <button @click="nextPage">Next</button>
+    <p>
+      <button @click="prevPage" v-if="canShowPrevious">Previous</button>
+      <button @click="nextPage" v-if="canShowNext">Next</button>
     </p>
   </div>
 </template>
@@ -49,6 +49,8 @@ export default {
   data: function() {
     return {
       store: [],
+      visible: false,
+      hidden: false,
       pageSize: 5,
       currentPage: 1,
       currentSort: "name",
@@ -101,9 +103,12 @@ export default {
     nextPage: function() {
       if (this.currentPage * this.pageSize < this.store.length)
         this.currentPage++;
+      this.canShowPrevious = true;
     },
     prevPage: function() {
-      if (this.currentPage > 1) this.currentPage--;
+      if (this.currentPage > 1) 
+      this.currentPage--;
+       this.canShowPrevious = false;
     }
   },
   computed: {
@@ -113,8 +118,7 @@ export default {
         .sort((a, b) => {
           let modifier = 1;
           if (this.currentSortDir === "desc") modifier = -1;
-          if (a[this.currentSort] < b[this.currentSort]) 
-          {
+          if (a[this.currentSort] < b[this.currentSort]) {
             return -1 * modifier;
           }
           if (a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
@@ -126,9 +130,8 @@ export default {
           let start = (this.currentPage - 1) * this.pageSize;
           let end = this.currentPage * this.pageSize;
           if (index >= start && index < end) return true;
-          if(index>4)
-          {
-            document.getElementById("pagination").style.visibility = "visible";
+          if (index > 4) {
+            this.canShowNext = true;
           }
         });
     }
@@ -147,8 +150,5 @@ td {
   padding-bottom: 5px;
   border-collapse: collapse;
   margin: 20px auto;
-}
-#pagination{
-  visibility:hidden;
 }
 </style>
