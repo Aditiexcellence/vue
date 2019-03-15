@@ -1,19 +1,16 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <Display/>
+    <Tables/>
   </div>
 </template>
 
 <script>
-import Display from "./components/form.vue";
-import BootstrapVue from 'bootstrap-vue';
-import Vue from 'vue';
-Vue.use(BootstrapVue)
+import Tables from "./components/table.vue";
 export default {
   name: "app",
   components: {
-    Display
+    Tables
   }
 };
 </script>

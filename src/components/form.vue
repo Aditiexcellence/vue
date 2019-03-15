@@ -29,12 +29,12 @@
           <b-col lg="5">Password:</b-col>
           <b-col lg="7">
             <b-form-input
-              type="password"
-              v-model="newElement.password"
-              data-vv-name="password"
-              v-validate
+              v-validate="'required'"
               name="password"
-              data-vv-rules="required|min:5"
+              type="password"
+              class="form-control"
+              v-model="newElement.password"
+              ref="password"
             />
           </b-col>
         </b-row>
@@ -42,12 +42,12 @@
           <b-col lg="5">Confirm-Password:</b-col>
           <b-col lg="7">
             <b-form-input
+              v-validate="'required|confirmed:password'"
+              name="confirm-password"
               type="password"
+              class="form-control"
               v-model="newElement.confirmpassword"
-              data-vv-name="confirm-password"
-              v-validate
-              name="password"
-              data-vv-rules="confirmed:password"
+              data-vv-as="password"
             />
             {{errors.first('confirm-password')}}
           </b-col>
@@ -158,34 +158,20 @@ export default {
       this.newElement.password = dataToEdit.password;
       this.newElement.confirmpassword = dataToEdit.confirmpassword;
       this.newElement.checked = dataToEdit.checked;
+      this.newElement.index = index;
     },
     addUser: function() {
-      if (this.store.length) {
-        this.store.forEach((data, index) => {
-          if (data.id == this.newElement.id) {
-            this.store.splice(this.store[index], 1, this.newElement);
-            this.newElement = {
-              id: "",
-              name: "",
-              email: "",
-              password: "",
-              confirmpass: "",
-              dob: "",
-              checked: ""
-            };
-          } else {
-            this.store.push(this.newElement);
-            this.newElement = {
-              id: "",
-              name: "",
-              email: "",
-              password: "",
-              confirmpassword: "",
-              dob: "",
-              checked: ""
-            };
-          }
-        });
+      if (data.id == this.newElement.id) {
+        this.store.splice(this.newElement.index, 1, this.newElement);
+        this.newElement = {
+          id: "",
+          name: "",
+          email: "",
+          password: "",
+          confirmpass: "",
+          dob: "",
+          checked: ""
+        };
       } else {
         this.store.push(this.newElement);
         this.newElement = {
