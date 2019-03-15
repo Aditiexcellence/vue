@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import Counter from './components/counter.vue'
+import Counter from "./components/counter.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     Counter
   }
@@ -18,8 +18,7 @@ export default {
 
 <style>
 #app {
-
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
