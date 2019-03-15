@@ -11,12 +11,13 @@
       <v-text-field
         clearable
         type="number"
-        min="0"
+        min="1"
         color="white"
         v-model="id"
         id="id"
         name="id"
         label="id"
+        mask="##"
         v-if="canShowid"
       ></v-text-field>
       <v-flex xs12>
@@ -100,7 +101,7 @@ export default {
   data() {
     return {
       newTodo: "",
-      id: "",
+      id: 1,
       date: null,
       menu: false,
       modal: false,
@@ -112,7 +113,7 @@ export default {
       canShowid: true,
       newItem: {
         done: false,
-        id: "",
+        id: 0,
         msg: "",
         date: "",
         time: ""
@@ -146,7 +147,9 @@ export default {
   },
   methods: {
     addTodo() {
-      if (this.editRow.id == this.id) {
+      console.log(this.id, "gtrgtr");
+      console.log(this.todolist.length, "eergt");
+      if (this.newItem.id == this.todolist.length) {
         this.editedItem = {
           id: this.id,
           msg: this.newTodo,
@@ -158,14 +161,15 @@ export default {
         this.blankAllFields();
       } else {
         this.newItem = {
-          id: this.id,
           msg: this.newTodo,
           date: this.date,
-          time: this.time
+          time: this.time,
+          id: this.id,
         };
         this.$emit("submit-item", this.newItem);
         this.blankAllFields();
       }
+      this.id = this.todolist.length + 1;
     },
     blankAllFields() {
       this.id = "";
