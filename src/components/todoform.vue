@@ -128,11 +128,11 @@ export default {
       if (this.editRow.edit == true) {
         this.canShowid = false;
       }
-      this.newTodo = this.$props.editRow.newTodo;
-      this.id = this.$props.editRow.id;
-      this.date = this.$props.editRow.date;
-      this.time = this.$props.editRow.newTodo;
-      this.index = this.$props.editRow.index;
+      this.newTodo = this.editRow.newTodo;
+      this.id = this.editRow.id;
+      this.date = this.editRow.date;
+      this.time = this.editRow.time;
+      this.index = this.editRow.index;
     }
   },
   props: {
@@ -177,10 +177,8 @@ export default {
       let month = `${date.getMonth() + 1}`;
       let day = `${date.getDate()}`;
       const year = date.getFullYear();
-
       if (month.length < 2) month = `0${month}`;
       if (day.length < 2) day = `0${day}`;
-
       return [year, month, day].join("-");
     }
   }
