@@ -1,27 +1,18 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Tables/>
-  </div>
+<v-app>
+    <v-content>
+        <Todotable />
+    </v-content>
+</v-app>
 </template>
 
 <script>
-import Tables from "./components/table.vue";
-export default {
-  name: "app",
-  components: {
-    Tables
-  }
-};
-</script>
+import Todotable from './components/todotable.vue'
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin: 60px auto;
+export default {
+    name: 'App',
+    components: {
+        Todotable
+    }
 }
-</style>
+</script>
