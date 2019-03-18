@@ -160,7 +160,6 @@ export default {
           };
           this.$emit("submit-item", this.newItem);
           this.blankAllFields();
-          this.$refs.form.resetValidation();
         }
       }
     },
@@ -169,6 +168,7 @@ export default {
       this.date = "";
       this.time = "";
       this.index = undefined;
+      this.$refs.form.resetValidation();
     },
     formatDate(date) {
       let month = `${date.getMonth() + 1}`;

@@ -107,6 +107,7 @@ export default {
   methods: {
     submitItem(value) {
       this.todolist.push(value);
+      this.todolist.reverse();
     },
     removeTodo(index) {
       this.todolist.splice(index, 1);
