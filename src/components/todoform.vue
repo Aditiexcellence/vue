@@ -96,12 +96,9 @@ export default {
       newTodo: "",
       date: null,
       menu: false,
-      modal: false,
       menu2: false,
       time: null,
       menu3: false,
-      modal1: false,
-      modal2: false,
       valid: true,
       canShowid: true,
       rules: {

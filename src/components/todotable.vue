@@ -56,12 +56,7 @@ export default {
     return {
       date: null,
       menu: false,
-      modal: false,
-      menu2: false,
       time: null,
-      menu3: false,
-      modal1: false,
-      modal2: false,
       canShowedit: false,
       canShowid: true,
       completetodo: true,
@@ -111,11 +106,6 @@ export default {
     },
     removeTodo(index) {
       this.todolist.splice(index, 1);
-    },
-    blankAllFields() {
-      this.newTodo = "";
-      this.date = "";
-      this.time = "";
     },
     editItem(value, index) {
       this.editRow.newTodo = value.msg;
