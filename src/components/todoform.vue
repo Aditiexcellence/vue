@@ -23,7 +23,7 @@
         <v-layout row wrap>
           <v-flex xs5>
             <v-menu
-              v-model="menu2"
+              v-model="datemenu"
               :close-on-content-click="false"
               :nudge-right="40"
               lazy
@@ -42,14 +42,14 @@
                   :rules="[rules.required]"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="date" @input="menu2 = false" :min="minDate"></v-date-picker>
+              <v-date-picker v-model="date" @input="datemenu = false" :min="minDate"></v-date-picker>
             </v-menu>
           </v-flex>
           <v-spacer></v-spacer>
           <v-flex xs5>
             <v-menu
               ref="menu1"
-              v-model="menu3"
+              v-model="timemenu"
               :close-on-content-click="false"
               :nudge-right="40"
               :return-value.sync="time"
@@ -71,7 +71,7 @@
                 ></v-text-field>
               </template>
               <v-time-picker
-                v-if="menu3"
+                v-if="timemenu"
                 v-model="time"
                 full-width
                 @click:minute="$refs.menu1.save(time)"
@@ -96,9 +96,9 @@ export default {
       newTodo: "",
       date: null,
       menu: false,
-      menu2: false,
+      datemenu: false,
       time: null,
-      menu3: false,
+      timemenu: false,
       valid: true,
       canShowid: true,
       rules: {
