@@ -106,6 +106,15 @@ export default {
     },
     removeTodo(index) {
       this.todolist.splice(index, 1);
+      this.blankAllFields();
+    },
+     blankAllFields() {
+       this.editRow= {
+        newTodo: "",
+        date : "",
+        time: "",
+      },
+      this.index = undefined;
     },
     editItem(value, index) {
       this.editRow.newTodo = value.msg;
