@@ -10,8 +10,6 @@
                 <td>
                   <v-checkbox class="nes-checkbox" v-model="lists.item.done"></v-checkbox>
                 </td>
-                <td class="complete" v-if="lists.item.done">{{lists.item.id}}</td>
-                <td v-else>{{lists.item.id}}</td>
                 <td class="complete" v-if="lists.item.done">{{ lists.item.msg }}</td>
                 <td v-else>{{lists.item.msg}}</td>
                 <td class="complete" v-if="lists.item.done">{{ lists.item.date }}</td>
@@ -68,7 +66,6 @@ export default {
       canShowid: true,
       completetodo: true,
       editRow: {
-        id: "",
         newTodo: "",
         date: "",
         time: "",
@@ -78,10 +75,6 @@ export default {
         {
           text: "Todo Done",
           sortable: false
-        },
-        {
-          text: "ID",
-          value: "id"
         },
         {
           text: "Message",
@@ -97,6 +90,14 @@ export default {
           text: "Time",
           sortable: false,
           value: "time"
+        },
+        {
+          text: "Edit",
+          sortable: false
+        },
+        {
+          text: "Delete",
+          sortable: false
         }
       ],
       todolist: [],
@@ -111,13 +112,11 @@ export default {
       this.todolist.splice(index, 1);
     },
     blankAllFields() {
-      this.id = "";
       this.newTodo = "";
       this.date = "";
       this.time = "";
     },
     editItem(value, index) {
-      this.editRow.id = value.id;
       this.editRow.newTodo = value.msg;
       this.editRow.date = value.date;
       this.editRow.time = value.time;
