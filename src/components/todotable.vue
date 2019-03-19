@@ -6,20 +6,13 @@
           <v-card dark>
             <Todoform @submit-item="submitItem" :todolist="todolist" :editRow="editRow"/>
             <v-flex xs5 offset-sm7>
-              <v-text-field
-                v-model="search"
-                append-icon="search"
-                label="Search"
-                single-line
-                hide-details
-              ></v-text-field>
+              <v-text-field v-model="search" append-icon="search" label="Search"></v-text-field>
             </v-flex>
             <v-spacer></v-spacer>
             <v-data-table
               :headers="headers"
-              :items="todolist"
+              :items="filtertodolist"
               class="elevation-1"
-              :search="search"
               hide-actions
             >
               <template slot="items" slot-scope="lists">
@@ -115,10 +108,20 @@ export default {
       editedIndex: -1
     };
   },
+  computed: {
+    filtertodolist: {
+      get: function() {
+        return this.todolist.filter(todo => {
+          return todo.msg.toLowerCase().includes(this.search.toLowerCase());
+        });
+      },
+      set: function() {}
+    }
+  },
   methods: {
     submitItem(value) {
       this.todolist.push(value);
-      this.todolist.reverse();
+      this.filtertodolist = this.todolist.reverse();
     },
     removeTodo(index) {
       this.todolist.splice(index, 1);
