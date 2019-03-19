@@ -83,7 +83,6 @@ export default {
         },
         {
           text: "Time",
-          sortable: false,
           value: "time"
         },
         {
