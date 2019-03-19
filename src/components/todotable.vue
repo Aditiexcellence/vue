@@ -5,7 +5,16 @@
         <v-flex xs12 sm8 offset-sm2>
           <v-card dark>
             <Todoform @submit-item="submitItem" :todolist="todolist" :editRow="editRow"/>
-            <v-data-table :headers="headers" :items="todolist" class="elevation-1" hide-actions>
+            <v-flex xs5 offset-sm7>
+              <v-text-field v-model="search" append-icon="search" label="Search"></v-text-field>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-data-table
+              :headers="headers"
+              :items="filtertodolist"
+              class="elevation-1"
+              hide-actions
+            >
               <template slot="items" slot-scope="lists">
                 <td>
                   <v-checkbox class="nes-checkbox" v-model="lists.item.done"></v-checkbox>
@@ -55,6 +64,7 @@ export default {
   data() {
     return {
       date: null,
+      search: "",
       menu: false,
       time: null,
       canShowedit: false,
@@ -83,7 +93,6 @@ export default {
         },
         {
           text: "Time",
-          sortable: false,
           value: "time"
         },
         {
@@ -99,22 +108,32 @@ export default {
       editedIndex: -1
     };
   },
+  computed: {
+    filtertodolist: {
+      get: function() {
+        return this.todolist.filter(todo => {
+          return todo.msg.toLowerCase().includes(this.search.toLowerCase());
+        });
+      },
+      set: function() {}
+    }
+  },
   methods: {
     submitItem(value) {
       this.todolist.push(value);
-      this.todolist.reverse();
+      this.filtertodolist = this.todolist.reverse();
     },
     removeTodo(index) {
       this.todolist.splice(index, 1);
       this.blankAllFields();
     },
-     blankAllFields() {
-       this.editRow= {
+    blankAllFields() {
+      (this.editRow = {
         newTodo: "",
-        date : "",
-        time: "",
-      },
-      this.index = undefined;
+        date: "",
+        time: ""
+      }),
+        (this.index = undefined);
     },
     editItem(value, index) {
       this.editRow.newTodo = value.msg;
