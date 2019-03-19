@@ -5,7 +5,23 @@
         <v-flex xs12 sm8 offset-sm2>
           <v-card dark>
             <Todoform @submit-item="submitItem" :todolist="todolist" :editRow="editRow"/>
-            <v-data-table :headers="headers" :items="todolist" class="elevation-1" hide-actions>
+            <v-flex xs5 offset-sm7>
+              <v-text-field
+                v-model="search"
+                append-icon="search"
+                label="Search"
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-data-table
+              :headers="headers"
+              :items="todolist"
+              class="elevation-1"
+              :search="search"
+              hide-actions
+            >
               <template slot="items" slot-scope="lists">
                 <td>
                   <v-checkbox class="nes-checkbox" v-model="lists.item.done"></v-checkbox>
@@ -55,6 +71,7 @@ export default {
   data() {
     return {
       date: null,
+      search: "",
       menu: false,
       time: null,
       canShowedit: false,
@@ -107,13 +124,13 @@ export default {
       this.todolist.splice(index, 1);
       this.blankAllFields();
     },
-     blankAllFields() {
-       this.editRow= {
+    blankAllFields() {
+      (this.editRow = {
         newTodo: "",
-        date : "",
-        time: "",
-      },
-      this.index = undefined;
+        date: "",
+        time: ""
+      }),
+        (this.index = undefined);
     },
     editItem(value, index) {
       this.editRow.newTodo = value.msg;
